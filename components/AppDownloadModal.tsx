@@ -177,15 +177,15 @@ export default function AppDownloadModal() {
 
               {/* Action Buttons */}
               <div className="flex flex-col gap-2.5 w-full">
-                {/* Primary APK Download Button */}
+                {/* Primary Download App Button — Visits versestreamapp.com */}
                 <a
-                  href={VERSESTREAM_APK}
+                  href={VERSESTREAM_SITE}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group relative flex items-center justify-center gap-2.5 py-3.5 px-6 rounded-2xl bg-gradient-to-r from-[#FF385C] to-[#FF8A00] text-white font-extrabold text-sm sm:text-base shadow-lg shadow-[#FF385C]/30 hover:shadow-[#FF385C]/50 hover:scale-[1.02] active:scale-[0.98] transition-all duration-200"
                 >
                   <Download size={18} className="group-hover:translate-y-0.5 transition-transform" />
-                  <span>Download APK (Universal v1.0)</span>
+                  <span>Download App on VerseStream</span>
                 </a>
 
                 {/* Secondary Website Link */}
@@ -195,7 +195,7 @@ export default function AppDownloadModal() {
                   rel="noopener noreferrer"
                   className="flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-white/80 hover:text-white font-semibold text-xs sm:text-sm transition-colors"
                 >
-                  <span>Visit Official Site / TV Builds</span>
+                  <span>Visit versestreamapp.com</span>
                   <ExternalLink size={14} />
                 </a>
 
