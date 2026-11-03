@@ -1,15 +1,17 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import SafeImage from "@/components/SafeImage";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronLeft, Clock, Loader2, Star } from "lucide-react";
+import { ChevronLeft, Clock, Loader2, Star, Download } from "lucide-react";
 import { img } from "@/lib/tmdb";
 import { formatRuntime } from "@/lib/utils";
 import { useDragScroll } from "@/lib/useDragScroll";
 import VideoPlayer from "./VideoPlayer";
 import { openSmartlink } from "@/lib/ads";
+import { openAppDownloadModal } from "@/lib/appModal";
 
 interface Season {
   id: number;
@@ -78,6 +80,39 @@ export default function WatchClient({
         episode={mediaType === "tv" ? activeEpisode : undefined}
       />
 
+      {/* VerseStream 4K App Callout */}
+      <div className="mt-4 p-3.5 md:p-4 rounded-2xl bg-gradient-to-r from-[#FF385C]/15 via-[#FF8A00]/15 to-[#FF385C]/5 border border-[#FF385C]/25 flex flex-col sm:flex-row items-center justify-between gap-3 shadow-lg">
+        <div className="flex items-center gap-3 text-center sm:text-left">
+          <div className="w-10 h-10 rounded-xl overflow-hidden shrink-0 border border-white/20 shadow-md">
+            <Image
+              src="/versestream-logo.png"
+              alt="VerseStream"
+              width={40}
+              height={40}
+              className="w-full h-full object-cover"
+            />
+          </div>
+          <div>
+            <div className="flex items-center justify-center sm:justify-start gap-2">
+              <span className="text-xs sm:text-sm font-extrabold text-white">Stream Without Buffering or Ads</span>
+              <span className="px-1.5 py-0.5 rounded-full text-[9px] font-black bg-[#FF385C] text-white">4K APK</span>
+            </div>
+            <p className="text-[11px] text-white/60">
+              Download the official VerseStream app for pure cinema streaming on Android, Android TV &amp; FireStick.
+            </p>
+          </div>
+        </div>
+
+        <button
+          type="button"
+          onClick={() => openAppDownloadModal(title)}
+          className="shrink-0 w-full sm:w-auto flex items-center justify-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-[#FF385C] to-[#FF8A00] text-white font-extrabold text-xs shadow-md shadow-[#FF385C]/30 hover:scale-105 active:scale-95 transition-all"
+        >
+          <Download size={14} />
+          <span>Get Free App</span>
+        </button>
+      </div>
+
       <h1 className="font-display font-bold text-xl md:text-2xl text-white mt-5">
         {title}
       </h1>
@@ -94,9 +129,8 @@ export default function WatchClient({
           <div
             ref={seasonsRef}
             {...seasonsDragHandlers}
-            className={`flex gap-2 overflow-x-auto overflow-y-hidden no-scrollbar pt-1 pb-2 mb-5 md:cursor-grab ${
-              seasonsGrabbing ? "dragging md:cursor-grabbing" : ""
-            }`}
+            className={`flex gap-2 overflow-x-auto overflow-y-hidden no-scrollbar pt-1 pb-2 mb-5 md:cursor-grab ${seasonsGrabbing ? "dragging md:cursor-grabbing" : ""
+              }`}
             style={seasonsDragStyle}
           >
             {validSeasons.map((s) => (
@@ -104,17 +138,16 @@ export default function WatchClient({
                 key={s.id}
                 whileTap={{ scale: 0.92 }}
                 onClick={() => setActiveSeason(s.season_number)}
-                className={`shrink-0 px-4 py-2 rounded-full text-xs md:text-sm font-bold border transition-colors ${
-                  activeSeason === s.season_number
-                    ? "text-white border-transparent"
-                    : "text-white/50 border-white/10 hover:text-white hover:border-white/25"
-                }`}
+                className={`shrink-0 px-4 py-2 rounded-full text-xs md:text-sm font-bold border transition-colors ${activeSeason === s.season_number
+                  ? "text-white border-transparent"
+                  : "text-white/50 border-white/10 hover:text-white hover:border-white/25"
+                  }`}
                 style={
                   activeSeason === s.season_number
                     ? {
-                        background:
-                          "linear-gradient(120deg, #ff3ea5, #4f7dff, #8b5cf6)",
-                      }
+                      background:
+                        "linear-gradient(120deg, #ff3ea5, #4f7dff, #8b5cf6)",
+                    }
                     : {}
                 }
               >
@@ -138,11 +171,10 @@ export default function WatchClient({
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.35, delay: Math.min(i * 0.03, 0.3) }}
                     onClick={() => { openSmartlink(); setActiveEpisode(ep.episode_number); }}
-                    className={`text-left flex gap-3 p-2.5 rounded-2xl border transition-colors ${
-                      activeEpisode === ep.episode_number
-                        ? "border-neon-cyan/50 bg-white/[0.06]"
-                        : "border-white/5 bg-white/[0.02] hover:bg-white/[0.05] hover:border-white/15"
-                    }`}
+                    className={`text-left flex gap-3 p-2.5 rounded-2xl border transition-colors ${activeEpisode === ep.episode_number
+                      ? "border-neon-cyan/50 bg-white/[0.06]"
+                      : "border-white/5 bg-white/[0.02] hover:bg-white/[0.05] hover:border-white/15"
+                      }`}
                   >
                     <div className="relative w-[110px] h-[68px] shrink-0 rounded-xl overflow-hidden bg-base-700">
                       <SafeImage

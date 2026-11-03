@@ -7,6 +7,8 @@ import AmbientBackground from "@/components/AmbientBackground";
 import KeyboardShortcuts from "@/components/KeyboardShortcuts";
 import SidebarSkyscraperAd from "@/components/SidebarSkyscraperAd";
 import TelegramButton from "@/components/TelegramButton";
+import AppDownloadModal from "@/components/AppDownloadModal";
+import FloatingAppButton from "@/components/FloatingAppButton";
 import { SITE_URL, SITE_NAME, SITE_DESCRIPTION } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -130,7 +132,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
@@ -144,9 +146,8 @@ export default function RootLayout({
       <body
         className="bg-base-900 text-white antialiased"
         style={{ fontFamily: "'Sora', sans-serif" }}
+        suppressHydrationWarning
       >
-        <style>{`:root{--font-display:'Unbounded',sans-serif;--font-body:'Sora',sans-serif;}`}</style>
-
         {/* Google AdSense */}
         <Script
           async
@@ -232,6 +233,8 @@ export default function RootLayout({
           {children}
         </main>
         <TelegramButton />
+        <FloatingAppButton />
+        <AppDownloadModal />
 
         {/* Vercel Web Analytics */}
         <Analytics />

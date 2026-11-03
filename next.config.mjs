@@ -5,8 +5,10 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Pre-build generation of icons in the public directory from app/icon.svg
-const svgPath = path.join(__dirname, 'app/icon.svg');
+// Pre-build generation of icons in the public directory from source icon
+const svgPath = fs.existsSync(path.join(__dirname, 'scripts/icon.svg'))
+  ? path.join(__dirname, 'scripts/icon.svg')
+  : path.join(__dirname, 'public/icon.svg');
 const publicDir = path.join(__dirname, 'public');
 
 if (fs.existsSync(svgPath)) {
@@ -84,7 +86,7 @@ const nextConfig = {
   },
 
   experimental: {
-    optimizePackageImports: ['lucide-react', 'framer-motion'],
+    optimizePackageImports: ['lucide-react'],
   },
 
   async headers() {

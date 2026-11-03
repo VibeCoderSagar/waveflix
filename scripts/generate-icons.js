@@ -2,7 +2,9 @@ const fs = require('fs');
 const path = require('path');
 const sharp = require('sharp');
 
-const svgPath = path.join(__dirname, '../app/icon.svg');
+const svgPath = fs.existsSync(path.join(__dirname, 'icon.svg'))
+  ? path.join(__dirname, 'icon.svg')
+  : path.join(__dirname, '../public/icon.svg');
 const publicDir = path.join(__dirname, '../public');
 
 // Ensure public directory exists

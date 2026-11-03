@@ -6,6 +6,7 @@ import UpcomingAd from "@/components/UpcomingAd";
 import BannerAd from "@/components/BannerAd";
 import TopBannerAd from "@/components/TopBannerAd";
 import InFeedAd from "@/components/InFeedAd";
+import HomeAppBanner from "@/components/HomeAppBanner";
 import {
   getTrending,
   getPopular,
@@ -142,6 +143,9 @@ export default async function HomePage() {
           viewAllHref="/tv-shows"
           accent="#22e2d6"
         />
+
+        {/* VerseStream Official App Banner */}
+        <HomeAppBanner />
 
         {/* Ad — 300x250 in-feed, before Anime */}
         <InFeedAd />

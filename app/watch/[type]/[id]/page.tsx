@@ -47,24 +47,34 @@ export async function generateMetadata({
     const data = await getDetails(mediaType, params.id);
     if (!data || data.success === false) return {};
     const title = data.title || data.name;
-    const description = `Watch ${title} online in HD on ${SITE_NAME}.`;
+    const year = (data.release_date || data.first_air_date || "").slice(0, 4);
+    const formattedYear = year ? ` (${year})` : "";
+    const actionText = mediaType === "movie" ? "Full Movie Online Free HD" : "Full Series Online Free HD";
+    const pageTitle = `Watch ${title}${formattedYear} ${actionText}`;
+    const description = `Stream and watch ${title}${formattedYear} online free in HD on ${SITE_NAME}. No signup required.`;
     const url = `${SITE_URL}/watch/${mediaType}/${params.id}`;
     const backdrop = img.backdrop(data.backdrop_path, "w1280");
 
     return {
-      title: `Watch ${title}`,
+      title: pageTitle,
       description,
+      keywords: [
+        `watch ${title} free`,
+        `watch ${title} online free`,
+        `stream ${title}${formattedYear} hd`,
+        `${title} watch free online`,
+      ],
       alternates: { canonical: url },
       openGraph: {
         type: mediaType === "movie" ? "video.movie" : "video.tv_show",
         url,
-        title: `Watch ${title}`,
+        title: pageTitle,
         description,
         images: [{ url: backdrop, width: 1280, height: 720, alt: title }],
       },
       twitter: {
         card: "summary_large_image",
-        title: `Watch ${title}`,
+        title: pageTitle,
         description,
         images: [backdrop],
       },

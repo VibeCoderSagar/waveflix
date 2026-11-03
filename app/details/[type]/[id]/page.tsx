@@ -12,6 +12,7 @@ import BannerAd from "@/components/BannerAd";
 import InFeedAd from "@/components/InFeedAd";
 import ContentRow from "@/components/ContentRow";
 import PlayButton from "@/components/PlayButton";
+import DetailAppButton from "@/components/DetailAppButton";
 
 export const revalidate = 3600;
 // Any title not pre-built below is still rendered on first visit and then
@@ -66,25 +67,38 @@ export async function generateMetadata({
 
     const title = data.title || data.name;
     const year = (data.release_date || data.first_air_date || "").slice(0, 4);
+    const formattedYear = year ? ` (${year})` : "";
+    const actionText = mediaType === "movie" ? "Full Movie Online Free HD" : "Full Series Online Free HD";
+    const pageTitle = `Watch ${title}${formattedYear} ${actionText}`;
     const description =
-      data.overview || `Watch ${title} online on ${SITE_NAME} — stream now in HD.`;
+      data.overview
+        ? `Watch ${title}${formattedYear} online free in HD on ${SITE_NAME}. ${data.overview.slice(0, 140)}...`
+        : `Watch ${title}${formattedYear} full movie online free in HD. Stream without signing up on ${SITE_NAME}.`;
     const backdrop = img.backdrop(data.backdrop_path, "w1280");
     const url = `${SITE_URL}/details/${mediaType}/${params.id}`;
 
     return {
-      title: year ? `${title} (${year})` : title,
+      title: pageTitle,
       description,
+      keywords: [
+        `watch ${title} online free`,
+        `watch ${title}${formattedYear} free`,
+        `${title} full movie free`,
+        `${title} watch free online`,
+        `${title} stream hd`,
+        `${SITE_NAME} ${title}`,
+      ],
       alternates: { canonical: url },
       openGraph: {
         type: mediaType === "movie" ? "video.movie" : "video.tv_show",
         url,
-        title,
+        title: pageTitle,
         description,
         images: [{ url: backdrop, width: 1280, height: 720, alt: title }],
       },
       twitter: {
         card: "summary_large_image",
-        title,
+        title: pageTitle,
         description,
         images: [backdrop],
       },
@@ -140,11 +154,11 @@ export default async function DetailsPage({
     genre: genres.map((g) => g.name),
     aggregateRating: data.vote_average
       ? {
-          "@type": "AggregateRating",
-          ratingValue: data.vote_average,
-          bestRating: 10,
-          ratingCount: data.vote_count || 1,
-        }
+        "@type": "AggregateRating",
+        ratingValue: data.vote_average,
+        bestRating: 10,
+        ratingCount: data.vote_count || 1,
+      }
       : undefined,
   };
 
@@ -213,9 +227,8 @@ export default async function DetailsPage({
                 key={g.id}
                 className="text-[11px] font-bold px-3 py-1 rounded-full border border-white/15 text-white/70"
                 style={{
-                  background: `linear-gradient(120deg, transparent, ${
-                    ["#ff3ea533", "#ffd23d33", "#3ddc8433", "#4f7dff33", "#8b5cf633"][i % 5]
-                  })`,
+                  background: `linear-gradient(120deg, transparent, ${["#ff3ea533", "#ffd23d33", "#3ddc8433", "#4f7dff33", "#8b5cf633"][i % 5]
+                    })`,
                 }}
               >
                 {g.name}
@@ -256,8 +269,9 @@ export default async function DetailsPage({
             {data.overview || "No description available."}
           </p>
 
-          <div className="flex justify-center md:justify-start gap-3">
+          <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center md:justify-start gap-4 mb-6">
             <PlayButton mediaType={mediaType} id={data.id} />
+            <DetailAppButton title={title} />
           </div>
         </div>
       </div>

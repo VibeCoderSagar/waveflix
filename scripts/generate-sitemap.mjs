@@ -20,8 +20,8 @@ if (!token) {
 }
 
 if (!token) {
-  console.error("❌ TMDB_READ_ACCESS_TOKEN is missing! Please set it in .env.local or environment variables.");
-  process.exit(1);
+  console.warn("⚠️ TMDB_READ_ACCESS_TOKEN is missing! Skipping detailed sitemap generation. Add TMDB_READ_ACCESS_TOKEN to Vercel Environment Variables.");
+  process.exit(0);
 }
 
 const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || "https://waveflix.online").replace(/\/$/, "");
@@ -35,6 +35,20 @@ function slugify(text) {
     .replace(/[^\w\s-]/g, "")
     .replace(/[\s_-]+/g, "-")
     .replace(/^-+|-+$/g, "");
+}
+
+function safeUrl(rawUrl) {
+  if (!rawUrl || typeof rawUrl !== "string") return "";
+  try {
+    const u = new URL(rawUrl);
+    u.pathname = u.pathname
+      .split("/")
+      .map((seg) => encodeURIComponent(decodeURIComponent(seg)))
+      .join("/");
+    return u.toString();
+  } catch {
+    return rawUrl;
+  }
 }
 
 function xmlEscape(str) {
@@ -99,7 +113,8 @@ async function fetchBatch(fetcher, pages, batchSize = 15) {
 function generateUrlSetXml(urls, today) {
   const items = urls
     .map((u) => {
-      const loc = xmlEscape(u.url);
+      const formattedUrl = safeUrl(u.url);
+      const loc = xmlEscape(formattedUrl);
       const mod = formatDate(u.lastmod, today);
       return `  <url>\n    <loc>${loc}</loc>\n    <lastmod>${mod}</lastmod>\n  </url>`;
     })
@@ -115,7 +130,7 @@ function generateSitemapIndexXml(sitemaps, today) {
   const items = sitemaps
     .map(
       (s) => `  <sitemap>
-    <loc>${xmlEscape(s)}</loc>
+    <loc>${xmlEscape(safeUrl(s))}</loc>
     <lastmod>${today}</lastmod>
   </sitemap>`
     )

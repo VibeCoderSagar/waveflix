@@ -1,10 +1,12 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { motion } from "framer-motion";
-import { Home, Clapperboard, Tv, Sparkles, Search, Film } from "lucide-react";
+import { Home, Clapperboard, Tv, Sparkles, Search, Film, Download } from "lucide-react";
 import { useState } from "react";
+import { openAppDownloadModal } from "@/lib/appModal";
 
 const TABS = [
   { href: "/", label: "Home", icon: Home, key: "H" },
@@ -53,17 +55,15 @@ export default function Navbar() {
                   <Link key={tab.href} href={tab.href} className="relative px-4 py-2 group">
                     <motion.span
                       whileTap={{ scale: 0.9 }}
-                      className={`relative z-10 inline-flex items-center gap-1.5 text-sm font-semibold transition-colors ${
-                        active ? "text-white" : "text-white/55 hover:text-white/85"
-                      }`}
+                      className={`relative z-10 inline-flex items-center gap-1.5 text-sm font-semibold transition-colors ${active ? "text-white" : "text-white/55 hover:text-white/85"
+                        }`}
                     >
                       {tab.label}
                       <kbd
-                        className={`inline-flex items-center justify-center w-4 h-4 rounded-[5px] text-[9px] font-bold border transition-colors ${
-                          active
+                        className={`inline-flex items-center justify-center w-4 h-4 rounded-[5px] text-[9px] font-bold border transition-colors ${active
                             ? "border-white/25 bg-white/10 text-white/70"
                             : "border-white/10 bg-white/5 text-white/35 group-hover:text-white/60 group-hover:border-white/25"
-                        }`}
+                          }`}
                       >
                         {tab.key}
                       </kbd>
@@ -80,35 +80,78 @@ export default function Navbar() {
               })}
             </nav>
 
-            <form onSubmit={submitSearch} className="ml-auto w-full max-w-xs">
-              <div className="relative">
-                <Search
-                  size={16}
-                  className="absolute left-3 top-1/2 -translate-y-1/2 text-white/40"
-                />
-                <input
-                  value={query}
-                  onChange={(e) => setQuery(e.target.value)}
-                  type="text"
-                  placeholder="Search movies, shows, anime..."
-                  className="w-full bg-white/5 border border-white/10 rounded-full py-2 pl-9 pr-9 text-sm text-white placeholder:text-white/35 focus:outline-none focus:border-neon-cyan/60 focus:bg-white/[0.07] transition-colors"
-                />
-                <kbd className="absolute right-3 top-1/2 -translate-y-1/2 inline-flex items-center justify-center w-4 h-4 rounded-[5px] text-[9px] font-bold border border-white/10 bg-white/5 text-white/35">
-                  S
-                </kbd>
-              </div>
-            </form>
+            <div className="ml-auto flex items-center gap-3">
+              <form onSubmit={submitSearch} className="w-full max-w-xs">
+                <div className="relative">
+                  <Search
+                    size={16}
+                    className="absolute left-3 top-1/2 -translate-y-1/2 text-white/40"
+                  />
+                  <input
+                    value={query}
+                    onChange={(e) => setQuery(e.target.value)}
+                    type="text"
+                    placeholder="Search movies, shows, anime..."
+                    className="w-full bg-white/5 border border-white/10 rounded-full py-2 pl-9 pr-9 text-sm text-white placeholder:text-white/35 focus:outline-none focus:border-neon-cyan/60 focus:bg-white/[0.07] transition-colors"
+                  />
+                  <kbd className="absolute right-3 top-1/2 -translate-y-1/2 inline-flex items-center justify-center w-4 h-4 rounded-[5px] text-[9px] font-bold border border-white/10 bg-white/5 text-white/35">
+                    S
+                  </kbd>
+                </div>
+              </form>
+
+              {/* VerseStream App Download CTA Button */}
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                type="button"
+                onClick={() => openAppDownloadModal()}
+                className="flex items-center gap-2 px-3.5 py-2 rounded-full bg-gradient-to-r from-[#FF385C]/20 via-[#FF8A00]/20 to-[#FF385C]/10 hover:from-[#FF385C]/35 hover:to-[#FF8A00]/35 border border-[#FF385C]/40 text-white transition-all text-xs font-bold shrink-0 shadow-lg shadow-[#FF385C]/15"
+              >
+                <div className="w-5 h-5 rounded-md overflow-hidden shrink-0 border border-white/20">
+                  <Image
+                    src="/versestream-logo.png"
+                    alt="VerseStream"
+                    width={20}
+                    height={20}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <span className="text-[#FF8A00] tracking-wide">Get App</span>
+                <span className="px-1.5 py-0.5 rounded-full text-[9px] font-black bg-[#FF385C] text-white">4K</span>
+              </motion.button>
+            </div>
           </div>
         </div>
       </header>
 
       {/* ---------- Mobile top mini header ---------- */}
       <header className="fixed top-0 left-0 right-0 z-50 md:hidden backdrop-blur-xl bg-base-900/80 border-b border-white/5">
-        <div className="flex items-center gap-2 px-4 h-[60px]">
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-neon-pink via-neon-violet to-neon-blue flex items-center justify-center">
-            <Film size={16} className="text-white" />
+        <div className="flex items-center justify-between px-4 h-[60px]">
+          <div className="flex items-center gap-2">
+            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-neon-pink via-neon-violet to-neon-blue flex items-center justify-center">
+              <Film size={16} className="text-white" />
+            </div>
+            <span className="font-display font-extrabold text-lg text-rainbow">WaveFlix</span>
           </div>
-          <span className="font-display font-extrabold text-lg text-rainbow">WaveFlix</span>
+
+          <motion.button
+            whileTap={{ scale: 0.92 }}
+            type="button"
+            onClick={() => openAppDownloadModal()}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-[#FF385C] to-[#FF8A00] text-white text-xs font-extrabold shadow-md shadow-[#FF385C]/30"
+          >
+            <div className="w-4 h-4 rounded overflow-hidden">
+              <Image
+                src="/versestream-logo.png"
+                alt="App"
+                width={16}
+                height={16}
+                className="w-full h-full object-cover"
+              />
+            </div>
+            <span>App (4K)</span>
+          </motion.button>
         </div>
       </header>
 
@@ -127,9 +170,8 @@ export default function Navbar() {
                   >
                     <motion.div
                       animate={active ? { y: -2 } : { y: 0 }}
-                      className={`relative flex items-center justify-center w-9 h-9 rounded-xl ${
-                        active ? "bg-white/10" : ""
-                      }`}
+                      className={`relative flex items-center justify-center w-9 h-9 rounded-xl ${active ? "bg-white/10" : ""
+                        }`}
                     >
                       {active && (
                         <motion.div
@@ -145,9 +187,8 @@ export default function Navbar() {
                       />
                     </motion.div>
                     <span
-                      className={`text-[10px] font-semibold ${
-                        active ? "text-white" : "text-white/40"
-                      }`}
+                      className={`text-[10px] font-semibold ${active ? "text-white" : "text-white/40"
+                        }`}
                     >
                       {tab.label}
                     </span>

@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 :root {
-  --font-display: "Clash", "Sora", sans-serif;
-  --font-body: "Sora", sans-serif;
+  --font-display: 'Unbounded', 'Sora', sans-serif;
+  --font-body: 'Sora', sans-serif;
 }
 
 * {
@@ -26,23 +26,20 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
-html,
 body {
   background-color: #07070c;
   color: #f4f2ff;
-  overscroll-behavior-y: none;
-  /* Prevent layout shifts during scroll */
-  overflow-x: hidden;
-}
-
-body {
   font-family: var(--font-body);
   position: relative;
+  min-height: 100vh;
   /* Promote body to its own compositor layer */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: clip;
 }
 
 /* ---------- Rainbow wave background used behind hero / section headers ---------- */
@@ -251,8 +248,8 @@ body {
   will-change: scroll-position;
   /* Hardware-accelerated momentum scrolling on iOS */
   -webkit-overflow-scrolling: touch;
-  /* Allow horizontal scroll touch, let vertical pass to the page */
-  touch-action: pan-x;
+  /* Allow horizontal scroll touch and let vertical page scrolling pass through */
+  touch-action: pan-y pan-x;
   /* Prevent GPU layer explosion from sub-pixel scroll positions */
   transform: translateZ(0);
 }

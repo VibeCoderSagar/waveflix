@@ -1,12 +1,14 @@
 "use client";
 
 import SafeImage from "@/components/SafeImage";
+import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { Play, Info, Star } from "lucide-react";
 import { useEffect, useState } from "react";
 import { ContentItem, img } from "@/lib/tmdb";
 import { detailsUrl } from "@/lib/utils";
+import { openAppDownloadModal } from "@/lib/appModal";
 
 export default function Hero({ items }: { items: ContentItem[] }) {
   const [active, setActive] = useState(0);
@@ -117,6 +119,26 @@ export default function Hero({ items }: { items: ContentItem[] }) {
                   <Info size={16} /> Details
                 </motion.span>
               </Link>
+
+              <motion.button
+                type="button"
+                whileHover={{ scale: 1.04 }}
+                whileTap={{ scale: 0.94 }}
+                onClick={() => openAppDownloadModal(item.title)}
+                className="hidden sm:flex items-center gap-2 bg-gradient-to-r from-[#FF385C]/25 to-[#FF8A00]/25 hover:from-[#FF385C]/40 hover:to-[#FF8A00]/40 border border-[#FF385C]/40 backdrop-blur-md text-white font-bold px-4 py-3 rounded-full text-sm shadow-lg shadow-[#FF385C]/15 transition-all"
+                style={{ willChange: "transform" }}
+              >
+                <div className="w-5 h-5 rounded-md overflow-hidden shrink-0 border border-white/20">
+                  <Image
+                    src="/versestream-logo.png"
+                    alt="VerseStream"
+                    width={20}
+                    height={20}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <span className="text-[#FF8A00]">Watch in App</span>
+              </motion.button>
             </div>
           </motion.div>
         </AnimatePresence>

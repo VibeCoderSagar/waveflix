@@ -1,11 +1,13 @@
 "use client";
 
 import SafeImage from "@/components/SafeImage";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Star } from "lucide-react";
 import { ContentItem, img } from "@/lib/tmdb";
 import { openSmartlink } from "@/lib/ads";
 import { detailsUrl } from "@/lib/utils";
+import { openAppDownloadModal } from "@/lib/appModal";
 
 export default function ContentCard({
   item,
@@ -69,6 +71,29 @@ export default function ContentCard({
             <span className="absolute top-2 left-2 text-[9px] font-bold tracking-wider uppercase px-2 py-1 rounded-full bg-white/10 backdrop-blur-md text-white/80 border border-white/10">
               {item.mediaType === "tv" ? "Series" : "Movie"}
             </span>
+
+            {/* Quick App Stream Trigger on Hover */}
+            <div className="absolute inset-x-2 bottom-2.5 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex justify-center z-10">
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  openAppDownloadModal(item.title);
+                }}
+                className="w-full flex items-center justify-center gap-1.5 py-1.5 px-2 rounded-xl bg-gradient-to-r from-[#FF385C] to-[#FF8A00] text-white text-[11px] font-black tracking-wide shadow-lg shadow-black/60 hover:scale-[1.03] active:scale-[0.97] transition-all"
+              >
+                <div className="w-3.5 h-3.5 rounded overflow-hidden shrink-0">
+                  <Image
+                    src="/versestream-logo.png"
+                    alt="App"
+                    width={14}
+                    height={14}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <span>Watch in 4K App</span>
+              </button>
+            </div>
           </div>
         </div>
         <p className="mt-2 text-[13px] md:text-sm font-semibold text-white/90 line-clamp-1 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-neon-pink group-hover:to-neon-blue transition-all duration-200">
