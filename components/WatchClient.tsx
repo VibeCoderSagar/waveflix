@@ -12,6 +12,7 @@ import { useDragScroll } from "@/lib/useDragScroll";
 import VideoPlayer from "./VideoPlayer";
 import { openSmartlink } from "@/lib/ads";
 import { openAppDownloadModal } from "@/lib/appModal";
+import { triggerMonetagVignette } from "@/lib/monetag";
 
 interface Season {
   id: number;
@@ -170,7 +171,11 @@ export default function WatchClient({
                     initial={{ opacity: 0, y: 14 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.35, delay: Math.min(i * 0.03, 0.3) }}
-                    onClick={() => { openSmartlink(); setActiveEpisode(ep.episode_number); }}
+                    onClick={() => {
+                      openSmartlink();
+                      triggerMonetagVignette();
+                      setActiveEpisode(ep.episode_number);
+                    }}
                     className={`text-left flex gap-3 p-2.5 rounded-2xl border transition-colors ${activeEpisode === ep.episode_number
                       ? "border-neon-cyan/50 bg-white/[0.06]"
                       : "border-white/5 bg-white/[0.02] hover:bg-white/[0.05] hover:border-white/15"

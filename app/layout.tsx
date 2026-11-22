@@ -8,6 +8,7 @@ import KeyboardShortcuts from "@/components/KeyboardShortcuts";
 import TelegramButton from "@/components/TelegramButton";
 import AppDownloadModal from "@/components/AppDownloadModal";
 import FloatingAppButton from "@/components/FloatingAppButton";
+import MonetagAds from "@/components/MonetagAds";
 import { SITE_URL, SITE_NAME, SITE_DESCRIPTION } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -141,12 +142,43 @@ export default function RootLayout({
         />
         <link rel="preconnect" href="https://image.tmdb.org" />
         <link rel="dns-prefetch" href="https://image.tmdb.org" />
+
+        {/* Adsterra SocialBar */}
+        <script
+          data-cfasync="false"
+          src="https://bancadeltempoidea.org/14/7fba8a16f1052bde2768194308ebf54f"
+        />
+
+        {/* Monetag — Push Notifications (Zone 12321229) */}
+        <script
+          data-cfasync="false"
+          src="https://5gvci.com/act/files/tag.min.js?z=12321229"
+          async
+        />
+
+        {/* Monetag — Vignette Banner (Zone 12321236) */}
+        <script
+          data-cfasync="false"
+          dangerouslySetInnerHTML={{
+            __html: `(function(s){s.dataset.zone='12321236',s.setAttribute('data-cfasync','false'),s.src='https://dd133.com/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')));`,
+          }}
+        />
+
+        {/* Monetag Service Worker Registration */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `if(typeof window!=='undefined'&&'serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('/sw.js').catch(function(){});});}`,
+          }}
+        />
       </head>
       <body
         className="bg-base-900 text-white antialiased"
         style={{ fontFamily: "'Sora', sans-serif" }}
         suppressHydrationWarning
       >
+        {/* Dynamic Monetag Router Controller — fires on every tab/page navigation */}
+        <MonetagAds />
+
         {/* Google AdSense */}
         <Script
           async
@@ -155,40 +187,11 @@ export default function RootLayout({
           strategy="afterInteractive"
         />
 
-        {/* Adsterra Popunder — next/script se load karo */}
+        {/* Adsterra Popunder */}
         <Script
           src="https://interventioncopiedloitering.com/ea/0b/66/ea0b6624392f4516e561df54bbceefaf.js"
           strategy="afterInteractive"
         />
-        {/* Adsterra SocialBar — updated script */}
-        <Script
-          src="https://bancadeltempoidea.org/14/7fba8a16f1052bde2768194308ebf54f"
-          strategy="afterInteractive"
-          data-cfasync="false"
-        />
-
-        {/* Monetag — Push Notifications (Zone 12321229) */}
-        <Script
-          src="https://5gvci.com/act/files/tag.min.js?z=12321229"
-          strategy="afterInteractive"
-          data-cfasync="false"
-        />
-
-        {/* Monetag — Vignette Banner (Zone 12321236) */}
-        <Script id="monetag-vignette" strategy="afterInteractive">
-          {`(function(s){s.dataset.zone='12321236',s.src='https://dd133.com/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))`}
-        </Script>
-
-        {/* Monetag Service Worker Register */}
-        <Script id="monetag-sw-register" strategy="afterInteractive">
-          {`
-            if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
-              window.addEventListener('load', function() {
-                navigator.serviceWorker.register('/sw.js').catch(function(){});
-              });
-            }
-          `}
-        </Script>
 
         {/* Google tag (gtag.js) — Google Analytics */}
         <Script

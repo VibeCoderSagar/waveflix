@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { Play, ListVideo } from "lucide-react";
 import { openSmartlink } from "@/lib/ads";
+import { triggerMonetagVignette } from "@/lib/monetag";
 
 export default function PlayButton({
   mediaType,
@@ -16,6 +17,7 @@ export default function PlayButton({
 
   const handleClick = () => {
     openSmartlink();
+    triggerMonetagVignette();
     router.push(`/watch/${mediaType}/${id}`);
   };
 

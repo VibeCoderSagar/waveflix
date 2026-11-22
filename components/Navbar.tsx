@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 import { Home, Clapperboard, Tv, Sparkles, Search, Film, Download } from "lucide-react";
 import { useState } from "react";
 import { openAppDownloadModal } from "@/lib/appModal";
+import { triggerMonetagVignette } from "@/lib/monetag";
 
 const TABS = [
   { href: "/", label: "Home", icon: Home, key: "H" },
@@ -52,7 +53,12 @@ export default function Navbar() {
               {TABS.filter((t) => t.href !== "/search").map((tab) => {
                 const active = isActive(tab.href);
                 return (
-                  <Link key={tab.href} href={tab.href} className="relative px-4 py-2 group">
+                  <Link
+                    key={tab.href}
+                    href={tab.href}
+                    onClick={() => triggerMonetagVignette()}
+                    className="relative px-4 py-2 group"
+                  >
                     <motion.span
                       whileTap={{ scale: 0.9 }}
                       className={`relative z-10 inline-flex items-center gap-1.5 text-sm font-semibold transition-colors ${active ? "text-white" : "text-white/55 hover:text-white/85"
@@ -163,7 +169,12 @@ export default function Navbar() {
               const active = isActive(tab.href);
               const Icon = tab.icon;
               return (
-                <Link key={tab.href} href={tab.href} className="flex-1">
+                <Link
+                  key={tab.href}
+                  href={tab.href}
+                  onClick={() => triggerMonetagVignette()}
+                  className="flex-1"
+                >
                   <motion.div
                     whileTap={{ scale: 0.82 }}
                     className="flex flex-col items-center gap-1 py-2.5"

@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import { ContentItem, img } from "@/lib/tmdb";
 import { detailsUrl } from "@/lib/utils";
 import { openAppDownloadModal } from "@/lib/appModal";
+import { triggerMonetagVignette } from "@/lib/monetag";
 
 export default function Hero({ items }: { items: ContentItem[] }) {
   const [active, setActive] = useState(0);
@@ -99,7 +100,10 @@ export default function Hero({ items }: { items: ContentItem[] }) {
               {item.overview}
             </p>
             <div className="flex items-center gap-3">
-              <Link href={`/watch/${item.mediaType}/${item.id}`}>
+              <Link
+                href={`/watch/${item.mediaType}/${item.id}`}
+                onClick={() => triggerMonetagVignette()}
+              >
                 <motion.span
                   whileHover={{ scale: 1.04 }}
                   whileTap={{ scale: 0.94 }}
@@ -109,7 +113,10 @@ export default function Hero({ items }: { items: ContentItem[] }) {
                   <Play size={16} fill="black" /> Play
                 </motion.span>
               </Link>
-              <Link href={detailsUrl(item.mediaType, item.id, item.title)}>
+              <Link
+                href={detailsUrl(item.mediaType, item.id, item.title)}
+                onClick={() => triggerMonetagVignette()}
+              >
                 <motion.span
                   whileHover={{ scale: 1.04 }}
                   whileTap={{ scale: 0.94 }}
