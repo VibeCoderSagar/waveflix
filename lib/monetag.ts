@@ -2,9 +2,31 @@
 
 /**
  * Monetag Ad Integration Helper
+ * MultiTag Zone: 312263
  * Push Notifications Zone: 12321229
  * Vignette Banner Zone: 12321236
  */
+
+export function triggerMonetagMultiTag() {
+  if (typeof window === "undefined") return;
+  try {
+    const existing = document.querySelectorAll('script[data-zone="312263"]');
+    existing.forEach((el) => {
+      try {
+        el.remove();
+      } catch (_) {}
+    });
+
+    const s = document.createElement("script");
+    s.dataset.zone = "312263";
+    s.src = "https://quge5.com/88/tag.min.js";
+    s.setAttribute("data-cfasync", "false");
+    s.async = true;
+    (document.body || document.documentElement).appendChild(s);
+  } catch (err) {
+    // Graceful error ignore
+  }
+}
 
 export function triggerMonetagPush() {
   if (typeof window === "undefined") return;
@@ -50,4 +72,10 @@ export function triggerMonetagVignette() {
   } catch (err) {
     // Graceful error ignore
   }
+}
+
+export function triggerAllMonetagAds() {
+  triggerMonetagMultiTag();
+  triggerMonetagPush();
+  triggerMonetagVignette();
 }

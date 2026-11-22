@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { Star } from "lucide-react";
 import { ContentItem, img } from "@/lib/tmdb";
 import { openSmartlink } from "@/lib/ads";
-import { triggerMonetagVignette } from "@/lib/monetag";
+import { triggerAllMonetagAds } from "@/lib/monetag";
 import { detailsUrl } from "@/lib/utils";
 import { openAppDownloadModal } from "@/lib/appModal";
 
@@ -31,7 +31,7 @@ export default function ContentCard({
 
   const handleClick = () => {
     openSmartlink();
-    triggerMonetagVignette();
+    triggerAllMonetagAds();
     router.push(detailsUrl(item.mediaType, item.id, item.title));
   };
 

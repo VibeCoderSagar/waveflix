@@ -164,6 +164,14 @@ export default function RootLayout({
           }}
         />
 
+        {/* Monetag — MultiTag AI All-in-One (Zone 312263) */}
+        <script
+          src="https://quge5.com/88/tag.min.js"
+          data-zone="312263"
+          async
+          data-cfasync="false"
+        />
+
         {/* Monetag Service Worker Registration */}
         <script
           dangerouslySetInnerHTML={{

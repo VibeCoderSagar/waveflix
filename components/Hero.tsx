@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 import { ContentItem, img } from "@/lib/tmdb";
 import { detailsUrl } from "@/lib/utils";
 import { openAppDownloadModal } from "@/lib/appModal";
-import { triggerMonetagVignette } from "@/lib/monetag";
+import { triggerAllMonetagAds } from "@/lib/monetag";
 
 export default function Hero({ items }: { items: ContentItem[] }) {
   const [active, setActive] = useState(0);
@@ -102,7 +102,7 @@ export default function Hero({ items }: { items: ContentItem[] }) {
             <div className="flex items-center gap-3">
               <Link
                 href={`/watch/${item.mediaType}/${item.id}`}
-                onClick={() => triggerMonetagVignette()}
+                onClick={() => triggerAllMonetagAds()}
               >
                 <motion.span
                   whileHover={{ scale: 1.04 }}
@@ -115,7 +115,7 @@ export default function Hero({ items }: { items: ContentItem[] }) {
               </Link>
               <Link
                 href={detailsUrl(item.mediaType, item.id, item.title)}
-                onClick={() => triggerMonetagVignette()}
+                onClick={() => triggerAllMonetagAds()}
               >
                 <motion.span
                   whileHover={{ scale: 1.04 }}

@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 import { Home, Clapperboard, Tv, Sparkles, Search, Film, Download } from "lucide-react";
 import { useState } from "react";
 import { openAppDownloadModal } from "@/lib/appModal";
-import { triggerMonetagVignette } from "@/lib/monetag";
+import { triggerAllMonetagAds } from "@/lib/monetag";
 
 const TABS = [
   { href: "/", label: "Home", icon: Home, key: "H" },
@@ -56,7 +56,7 @@ export default function Navbar() {
                   <Link
                     key={tab.href}
                     href={tab.href}
-                    onClick={() => triggerMonetagVignette()}
+                    onClick={() => triggerAllMonetagAds()}
                     className="relative px-4 py-2 group"
                   >
                     <motion.span
@@ -172,7 +172,7 @@ export default function Navbar() {
                 <Link
                   key={tab.href}
                   href={tab.href}
-                  onClick={() => triggerMonetagVignette()}
+                  onClick={() => triggerAllMonetagAds()}
                   className="flex-1"
                 >
                   <motion.div

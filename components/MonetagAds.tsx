@@ -2,23 +2,23 @@
 
 import { useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
-import { triggerMonetagPush, triggerMonetagVignette } from "@/lib/monetag";
+import { triggerAllMonetagAds, triggerMonetagMultiTag, triggerMonetagVignette } from "@/lib/monetag";
 
 export default function MonetagAds() {
   const pathname = usePathname();
   const lastPath = useRef<string>("");
 
   useEffect(() => {
-    // Trigger on mount and whenever the tab / route changes
-    triggerMonetagPush();
-    triggerMonetagVignette();
+    // Trigger all Monetag ads (MultiTag, Push, Vignette) on mount & every route/tab change
+    triggerAllMonetagAds();
     lastPath.current = pathname;
 
-    // Also trigger on link / tab clicks across all pages
+    // Trigger on link / tab clicks across all pages
     const handleDocumentClick = (e: MouseEvent) => {
       const target = (e.target as HTMLElement)?.closest("a, button, [role='button'], nav");
       if (target) {
         setTimeout(() => {
+          triggerMonetagMultiTag();
           triggerMonetagVignette();
         }, 150);
       }
