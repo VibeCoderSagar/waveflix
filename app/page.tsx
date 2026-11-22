@@ -2,10 +2,6 @@ import type { Metadata } from "next";
 import Hero from "@/components/Hero";
 import ContentRow from "@/components/ContentRow";
 import OTTRow from "@/components/OTTRow";
-import UpcomingAd from "@/components/UpcomingAd";
-import BannerAd from "@/components/BannerAd";
-import TopBannerAd from "@/components/TopBannerAd";
-import InFeedAd from "@/components/InFeedAd";
 import HomeAppBanner from "@/components/HomeAppBanner";
 import {
   getTrending,
@@ -103,9 +99,6 @@ export default async function HomePage() {
       />
       <Hero items={heroPool} />
 
-      {/* Ad — top banner, first natural break after the hero */}
-      <TopBannerAd />
-
       <OTTRow platforms={ottPlatforms} />
 
       <div className="mt-2 md:mt-4">
@@ -116,9 +109,6 @@ export default async function HomePage() {
           viewAllHref="/movies?sort=trending"
           accent="#ff3ea5"
         />
-
-        {/* Ad — Trending ke baad */}
-        <UpcomingAd />
 
         <ContentRow
           title="New Releases"
@@ -134,9 +124,6 @@ export default async function HomePage() {
           accent="#4f7dff"
         />
 
-        {/* Ad — Movies ke baad */}
-        <UpcomingAd />
-
         <ContentRow
           title="Popular TV Shows"
           items={tvRow}
@@ -147,9 +134,6 @@ export default async function HomePage() {
         {/* VerseStream Official App Banner */}
         <HomeAppBanner />
 
-        {/* Ad — 300x250 in-feed, before Anime */}
-        <InFeedAd />
-
         <ContentRow
           title="Anime Spotlight"
           subtitle="Top anime series & films"
@@ -157,9 +141,6 @@ export default async function HomePage() {
           viewAllHref="/anime"
           accent="#8b5cf6"
         />
-
-        {/* Ad — Anime ke baad */}
-        <UpcomingAd />
 
         <ContentRow
           title="Airing This Week"
@@ -175,9 +156,6 @@ export default async function HomePage() {
           accent="#ff8a3d"
         />
       </div>
-
-      {/* Bottom banner ad */}
-      <BannerAd />
     </div>
   );
 }

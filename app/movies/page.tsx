@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import CategoryHeader from "@/components/CategoryHeader";
 import InfiniteGrid from "@/components/InfiniteGrid";
-import TopBannerAd from "@/components/TopBannerAd";
 import BreadcrumbJsonLd from "@/components/BreadcrumbJsonLd";
 import { getPopular, getTopRated, getNowPlayingMovies, getTrending } from "@/lib/tmdb";
 import { SITE_URL, SITE_NAME } from "@/lib/site";
@@ -77,7 +76,6 @@ export default async function MoviesPage({
         activeSort={sort}
         accent="#ff3ea5"
       />
-      <TopBannerAd />
       <InfiniteGrid mediaType="movie" category={sort} initialItems={items} initialPage={1} />
     </div>
   );

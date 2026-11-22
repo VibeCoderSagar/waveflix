@@ -2,7 +2,6 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import CategoryHeader from "@/components/CategoryHeader";
 import InfiniteGrid from "@/components/InfiniteGrid";
-import TopBannerAd from "@/components/TopBannerAd";
 import BreadcrumbJsonLd from "@/components/BreadcrumbJsonLd";
 import { discoverAnime } from "@/lib/tmdb";
 import { SITE_URL, SITE_NAME } from "@/lib/site";
@@ -96,8 +95,6 @@ export default async function AnimePage({
           Movies
         </Link>
       </div>
-
-      <TopBannerAd />
 
       <InfiniteGrid
         mediaType={type}

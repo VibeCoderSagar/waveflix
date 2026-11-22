@@ -3,22 +3,7 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 import { ContentItem } from "@/lib/tmdb";
 import ContentCard from "./ContentCard";
-import BannerAd from "./BannerAd";
-import InFeedAd from "./InFeedAd";
 import { Loader2 } from "lucide-react";
-
-// Cards per grid "chunk" — an InFeedAd is rendered as its own full-width
-// row between chunks. Keeping the ad OUTSIDE the CSS grid (rather than
-// spanning it with grid-column: 1/-1) means it always gets real, honest
-// full-container width to center itself in — no auto-fill/dense edge
-// cases to fight, and it behaves identically to the home page's ad rows.
-const CHUNK_SIZE = 12;
-
-function chunk<T>(arr: T[], size: number): T[][] {
-  const out: T[][] = [];
-  for (let i = 0; i < arr.length; i += size) out.push(arr.slice(i, i + size));
-  return out;
-}
 
 export default function InfiniteGrid({
   mediaType,
@@ -92,37 +77,16 @@ export default function InfiniteGrid({
     return () => observer.disconnect();
   }, [loadMore]);
 
-  const chunks = chunk(items, CHUNK_SIZE);
-
   return (
     <div>
-      {chunks.map((group, chunkIndex) => {
-        const baseIndex = chunkIndex * CHUNK_SIZE;
-        return (
-          <div key={`chunk-${chunkIndex}`}>
-            {/* Pure CSS grid — no framer-motion wrapper per card.
-                ContentCard handles its own staggered CSS entry animation.
-                This eliminates hundreds of IntersectionObserver + JS
-                animation instances that caused jank during scroll. */}
-            <div
-              className="grid grid-flow-row-dense gap-4 md:gap-5 px-4 md:px-8"
-              style={{ gridTemplateColumns: "repeat(auto-fill, minmax(140px, 1fr))" }}
-            >
-              {group.map((item, j) => {
-                const i = baseIndex + j;
-                return (
-                  <ContentCard key={`${item.mediaType}-${item.id}-${i}`} item={item} index={i} size="lg" fluid />
-                );
-              })}
-            </div>
-
-            {/* Ad — its own full-width row between chunks, exactly like
-               the home page. Rendered outside the grid so it always gets
-               genuine full container width to center itself in. */}
-            {chunkIndex < chunks.length - 1 && <InFeedAd />}
-          </div>
-        );
-      })}
+      <div
+        className="grid grid-flow-row-dense gap-4 md:gap-5 px-4 md:px-8"
+        style={{ gridTemplateColumns: "repeat(auto-fill, minmax(140px, 1fr))" }}
+      >
+        {items.map((item, i) => (
+          <ContentCard key={`${item.mediaType}-${item.id}-${i}`} item={item} index={i} size="lg" fluid />
+        ))}
+      </div>
 
       <div ref={sentinelRef} className="flex items-center justify-center py-10">
         {loading && (
@@ -138,10 +102,6 @@ export default function InfiniteGrid({
           <p className="text-white/40 text-sm">Nothing found here yet.</p>
         )}
       </div>
-
-      {/* Bottom banner ad — sits below the grid, always the last thing on
-         the page since newly loaded items get appended above it. */}
-      {items.length > 0 && <BannerAd />}
     </div>
   );
 }

@@ -3,9 +3,6 @@ import type { Metadata } from "next";
 import { getDetails, getTrending, getPopular, img, MediaType } from "@/lib/tmdb";
 import { SITE_URL, SITE_NAME } from "@/lib/site";
 import WatchClient from "@/components/WatchClient";
-import UpcomingAd from "@/components/UpcomingAd";
-import BannerAd from "@/components/BannerAd";
-import InFeedAd from "@/components/InFeedAd";
 import ContentRow from "@/components/ContentRow";
 
 export const revalidate = 3600;
@@ -129,16 +126,10 @@ export default async function WatchPage({
         posterPath={data.poster_path}
         seasons={data.seasons}
       />
-      {/* Ad — Episodes ke baad, Recommendations se pehle */}
-      <UpcomingAd />
-      {/* Ad — 300x250 pair, right above recommendations */}
-      <InFeedAd />
       {recommendations.length > 0 && (
         <ContentRow title="More Like This" items={recommendations} accent="#ff8a3d" />
       )}
 
-      {/* Bottom banner ad — below recommendations */}
-      <BannerAd />
     </div>
   );
 }

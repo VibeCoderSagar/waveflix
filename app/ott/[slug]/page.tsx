@@ -6,7 +6,6 @@ import { getOTTPlatformBySlug, getOTTPlatforms, discoverByProvider, OTT_LOGO_URL
 import { SITE_URL } from "@/lib/site";
 import OTTSearch from "@/components/OTTSearch";
 import InfiniteGrid from "@/components/InfiniteGrid";
-import TopBannerAd from "@/components/TopBannerAd";
 
 export const revalidate = 3600;
 
@@ -155,7 +154,6 @@ export default async function OTTPlatformPage({
         })}
       </div>
 
-      <TopBannerAd />
 
       <InfiniteGrid
         mediaType={type}

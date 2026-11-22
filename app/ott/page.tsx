@@ -2,8 +2,6 @@ import type { Metadata } from "next";
 import { Tv2 } from "lucide-react";
 import { getOTTPlatforms } from "@/lib/ott";
 import OTTPlatformCard from "@/components/OTTPlatformCard";
-import BannerAd from "@/components/BannerAd";
-import TopBannerAd from "@/components/TopBannerAd";
 import { SITE_URL } from "@/lib/site";
 
 export const revalidate = 3600;
@@ -33,8 +31,6 @@ export default async function OTTLibraryPage() {
         </div>
       </div>
 
-      <TopBannerAd />
-
       {platforms.length === 0 ? (
         <p className="text-white/40 text-sm px-4 md:px-8 py-10">
           Couldn&apos;t load streaming platforms right now — try again in a bit.
@@ -49,9 +45,6 @@ export default async function OTTLibraryPage() {
           ))}
         </div>
       )}
-
-      {/* Bottom banner ad */}
-      <BannerAd />
     </div>
   );
 }

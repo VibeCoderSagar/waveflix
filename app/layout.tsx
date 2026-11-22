@@ -5,7 +5,6 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import AmbientBackground from "@/components/AmbientBackground";
 import KeyboardShortcuts from "@/components/KeyboardShortcuts";
-import SidebarSkyscraperAd from "@/components/SidebarSkyscraperAd";
 import TelegramButton from "@/components/TelegramButton";
 import AppDownloadModal from "@/components/AppDownloadModal";
 import FloatingAppButton from "@/components/FloatingAppButton";
@@ -167,6 +166,22 @@ export default function RootLayout({
           strategy="afterInteractive"
         />
 
+        {/* Monetag — Push Notifications, In-Page Push & Vignette (Zone 12296395) */}
+        <Script
+          src="https://5gvci.com/act/files/tag.min.js?z=12296395"
+          strategy="afterInteractive"
+          data-cfasync="false"
+        />
+        <Script id="monetag-sw-register" strategy="afterInteractive">
+          {`
+            if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
+              window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/sw.js').catch(function(){});
+              });
+            }
+          `}
+        </Script>
+
         {/* Google tag (gtag.js) — Google Analytics */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-TQLZB238N7"
@@ -227,7 +242,6 @@ export default function RootLayout({
 
         <AmbientBackground />
         <KeyboardShortcuts />
-        <SidebarSkyscraperAd />
         <Navbar />
         <main className="relative z-10 min-h-screen pb-24 md:pb-0 pt-[64px] md:pt-[76px]">
           {children}

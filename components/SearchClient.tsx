@@ -5,7 +5,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Search as SearchIcon, X, Loader2, TrendingUp } from "lucide-react";
 import { ContentItem } from "@/lib/tmdb";
 import ContentCard from "./ContentCard";
-import BannerAd from "./BannerAd";
 
 const SUGGESTIONS = [
   "Dune", "Attack on Titan", "Breaking Bad", "Spider-Man", "One Piece",
@@ -143,8 +142,6 @@ export default function SearchClient({ initialQuery }: { initialQuery: string })
         </AnimatePresence>
       </div>
 
-      {/* Bottom banner ad */}
-      {results.length > 0 && <BannerAd />}
     </div>
   );
 }

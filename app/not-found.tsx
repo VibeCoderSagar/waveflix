@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Compass } from "lucide-react";
-import BannerAd from "@/components/BannerAd";
 
 export default function NotFound() {
   return (
@@ -30,11 +29,6 @@ export default function NotFound() {
           Back to Home
         </motion.span>
       </Link>
-
-      {/* Ad */}
-      <div className="mt-10">
-        <BannerAd />
-      </div>
     </div>
   );
 }

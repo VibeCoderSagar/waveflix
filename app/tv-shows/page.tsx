@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import CategoryHeader from "@/components/CategoryHeader";
 import InfiniteGrid from "@/components/InfiniteGrid";
-import TopBannerAd from "@/components/TopBannerAd";
 import BreadcrumbJsonLd from "@/components/BreadcrumbJsonLd";
 import { getPopular, getTopRated, getOnTheAirTV, getTrending } from "@/lib/tmdb";
 import { SITE_URL, SITE_NAME } from "@/lib/site";
@@ -78,7 +77,6 @@ export default async function TVShowsPage({
         activeSort={sort === "on_the_air" ? "now_playing" : sort}
         accent="#22e2d6"
       />
-      <TopBannerAd />
       <InfiniteGrid mediaType="tv" category={sort === "on_the_air" ? "now_playing" : sort} initialItems={items} initialPage={1} />
     </div>
   );

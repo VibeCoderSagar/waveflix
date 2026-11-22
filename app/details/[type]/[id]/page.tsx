@@ -7,9 +7,6 @@ import { getDetails, getTrending, getPopular, img, MediaType } from "@/lib/tmdb"
 import { formatDate, formatRuntime } from "@/lib/utils";
 import { SITE_URL, SITE_NAME } from "@/lib/site";
 import CastRow from "@/components/CastRow";
-import UpcomingAd from "@/components/UpcomingAd";
-import BannerAd from "@/components/BannerAd";
-import InFeedAd from "@/components/InFeedAd";
 import ContentRow from "@/components/ContentRow";
 import PlayButton from "@/components/PlayButton";
 import DetailAppButton from "@/components/DetailAppButton";
@@ -278,10 +275,6 @@ export default async function DetailsPage({
 
       <div className="mt-10 md:mt-14">
         <CastRow cast={cast} />
-        {/* Ad — 300x250, right after cast */}
-        <InFeedAd />
-        {/* Ad — Cast aur Recommendations ke beech */}
-        <UpcomingAd />
         {recommendations.length > 0 && (
           <ContentRow
             title="You Might Also Like"
@@ -290,8 +283,6 @@ export default async function DetailsPage({
           />
         )}
 
-        {/* Bottom banner ad — below recommendations */}
-        <BannerAd />
       </div>
     </div>
   );
