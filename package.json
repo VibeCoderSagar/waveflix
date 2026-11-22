@@ -6,6 +6,7 @@
     "dev": "next dev",
     "build": "node scripts/generate-sitemap.mjs && next build",
     "pages:build": "node scripts/generate-sitemap.mjs && npx @cloudflare/next-on-pages",
+    "cloudflare:build": "node scripts/generate-sitemap.mjs && npx opennextjs-cloudflare build --dangerouslyUseUnsupportedNextVersion",
     "sitemap": "node scripts/generate-sitemap.mjs",
     "start": "next start",
     "lint": "next lint",
