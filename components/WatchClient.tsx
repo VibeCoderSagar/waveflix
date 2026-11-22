@@ -12,7 +12,6 @@ import { useDragScroll } from "@/lib/useDragScroll";
 import VideoPlayer from "./VideoPlayer";
 import { openSmartlink } from "@/lib/ads";
 import { openAppDownloadModal } from "@/lib/appModal";
-import { triggerAllMonetagAds } from "@/lib/monetag";
 
 interface Season {
   id: number;
@@ -173,7 +172,6 @@ export default function WatchClient({
                     transition={{ duration: 0.35, delay: Math.min(i * 0.03, 0.3) }}
                     onClick={() => {
                       openSmartlink();
-                      triggerAllMonetagAds();
                       setActiveEpisode(ep.episode_number);
                     }}
                     className={`text-left flex gap-3 p-2.5 rounded-2xl border transition-colors ${activeEpisode === ep.episode_number

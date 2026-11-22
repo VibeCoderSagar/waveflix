@@ -8,7 +8,6 @@ import KeyboardShortcuts from "@/components/KeyboardShortcuts";
 import TelegramButton from "@/components/TelegramButton";
 import AppDownloadModal from "@/components/AppDownloadModal";
 import FloatingAppButton from "@/components/FloatingAppButton";
-import MonetagAds from "@/components/MonetagAds";
 import { SITE_URL, SITE_NAME, SITE_DESCRIPTION } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -149,21 +148,6 @@ export default function RootLayout({
           src="https://bancadeltempoidea.org/14/7fba8a16f1052bde2768194308ebf54f"
         />
 
-        {/* Monetag — Push Notifications (Zone 12321229) */}
-        <script
-          data-cfasync="false"
-          src="https://5gvci.com/act/files/tag.min.js?z=12321229"
-          async
-        />
-
-        {/* Monetag — Vignette Banner (Zone 12321236) */}
-        <script
-          data-cfasync="false"
-          dangerouslySetInnerHTML={{
-            __html: `(function(s){s.dataset.zone='12321236',s.setAttribute('data-cfasync','false'),s.src='https://dd133.com/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')));`,
-          }}
-        />
-
         {/* Monetag — MultiTag AI All-in-One (Zone 312263) */}
         <script
           src="https://quge5.com/88/tag.min.js"
@@ -184,9 +168,6 @@ export default function RootLayout({
         style={{ fontFamily: "'Sora', sans-serif" }}
         suppressHydrationWarning
       >
-        {/* Dynamic Monetag Router Controller — fires on every tab/page navigation */}
-        <MonetagAds />
-
         {/* Google AdSense */}
         <Script
           async
