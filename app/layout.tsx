@@ -160,18 +160,26 @@ export default function RootLayout({
           src="https://interventioncopiedloitering.com/ea/0b/66/ea0b6624392f4516e561df54bbceefaf.js"
           strategy="afterInteractive"
         />
-        {/* Adsterra SocialBar */}
+        {/* Adsterra SocialBar — updated script */}
         <Script
-          src="https://interventioncopiedloitering.com/7f/ba/8a/7fba8a16f1052bde2768194308ebf54f.js"
-          strategy="afterInteractive"
-        />
-
-        {/* Monetag — Push Notifications, In-Page Push & Vignette (Zone 12296395) */}
-        <Script
-          src="https://5gvci.com/act/files/tag.min.js?z=12296395"
+          src="https://bancadeltempoidea.org/14/7fba8a16f1052bde2768194308ebf54f"
           strategy="afterInteractive"
           data-cfasync="false"
         />
+
+        {/* Monetag — Push Notifications (Zone 12321229) */}
+        <Script
+          src="https://5gvci.com/act/files/tag.min.js?z=12321229"
+          strategy="afterInteractive"
+          data-cfasync="false"
+        />
+
+        {/* Monetag — Vignette Banner (Zone 12321236) */}
+        <Script id="monetag-vignette" strategy="afterInteractive">
+          {`(function(s){s.dataset.zone='12321236',s.src='https://dd133.com/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))`}
+        </Script>
+
+        {/* Monetag Service Worker Register */}
         <Script id="monetag-sw-register" strategy="afterInteractive">
           {`
             if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {

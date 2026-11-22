@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "node scripts/generate-sitemap.mjs && next build",
+    "pages:build": "node scripts/generate-sitemap.mjs && npx @cloudflare/next-on-pages",
     "sitemap": "node scripts/generate-sitemap.mjs",
     "start": "next start",
     "lint": "next lint",
@@ -21,6 +22,7 @@
     "sharp": "^0.35.3"
   },
   "devDependencies": {
+    "@cloudflare/next-on-pages": "^1.13.7",
     "@netlify/plugin-nextjs": "^5.3.3",
     "@types/node": "^20.14.13",
     "@types/react": "^18.3.3",
@@ -31,6 +33,6 @@
     "typescript": "^5.5.4"
   },
   "engines": {
-    "node": ">=22.0.0"
+    "node": ">=20.0.0"
   }
 }
