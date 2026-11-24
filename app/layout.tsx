@@ -148,12 +148,12 @@ export default function RootLayout({
           src="https://bancadeltempoidea.org/14/7fba8a16f1052bde2768194308ebf54f"
         />
 
-        {/* Monetag — MultiTag AI All-in-One (Zone 312263) */}
+        {/* Monetag — Onclick Popunder (Zone 12292036) */}
         <script
-          src="https://quge5.com/88/tag.min.js"
-          data-zone="312263"
-          async
           data-cfasync="false"
+          dangerouslySetInnerHTML={{
+            __html: `(function(s){s.dataset.zone='12292036',s.setAttribute('data-cfasync','false'),s.src='https://llvpn.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')));`,
+          }}
         />
 
         {/* Monetag Service Worker Registration */}
