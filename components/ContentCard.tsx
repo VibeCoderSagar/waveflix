@@ -2,10 +2,10 @@
 
 import SafeImage from "@/components/SafeImage";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { Star } from "lucide-react";
 import { ContentItem, img } from "@/lib/tmdb";
-import { openSmartlink } from "@/lib/ads";
+import { triggerMonetagAds } from "@/lib/ads";
 import { detailsUrl } from "@/lib/utils";
 import { openAppDownloadModal } from "@/lib/appModal";
 
@@ -20,17 +20,10 @@ export default function ContentCard({
   size?: "sm" | "md" | "lg";
   fluid?: boolean;
 }) {
-  const router = useRouter();
-
   const widths: Record<string, string> = {
     sm: "w-[104px] md:w-[128px]",
     md: "w-[122px] md:w-[152px]",
     lg: "w-[140px] md:w-[176px]",
-  };
-
-  const handleClick = () => {
-    openSmartlink();
-    router.push(detailsUrl(item.mediaType, item.id, item.title));
   };
 
   /* Staggered CSS fade-in — zero JS, zero rAF, browser handles natively */
@@ -45,7 +38,11 @@ export default function ContentCard({
         contain: "layout" as React.CSSProperties["contain"],
       }}
     >
-      <div onClick={handleClick} className="block group cursor-pointer">
+      <Link
+        href={detailsUrl(item.mediaType, item.id, item.title)}
+        onClick={() => triggerMonetagAds()}
+        className="block group cursor-pointer"
+      >
         <div className="card-glow card-hover rounded-[18px] overflow-hidden bg-base-700 relative">
           <div className="relative aspect-[2/3] overflow-hidden rounded-[16px]">
             <SafeImage
@@ -102,7 +99,7 @@ export default function ContentCard({
         <p className="text-[11px] text-white/40">
           {item.releaseDate ? item.releaseDate.slice(0, 4) : "TBA"}
         </p>
-      </div>
+      </Link>
     </div>
   );
 }

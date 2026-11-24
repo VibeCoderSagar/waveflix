@@ -8,6 +8,7 @@ import KeyboardShortcuts from "@/components/KeyboardShortcuts";
 import TelegramButton from "@/components/TelegramButton";
 import AppDownloadModal from "@/components/AppDownloadModal";
 import FloatingAppButton from "@/components/FloatingAppButton";
+import MonetagAdManager from "@/components/MonetagAdManager";
 import { SITE_URL, SITE_NAME, SITE_DESCRIPTION } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -222,6 +223,7 @@ export default function RootLayout({
         <AmbientBackground />
         <KeyboardShortcuts />
         <Navbar />
+        <MonetagAdManager />
         <main className="relative z-10 min-h-screen pb-24 md:pb-0 pt-[64px] md:pt-[76px]">
           {children}
         </main>
