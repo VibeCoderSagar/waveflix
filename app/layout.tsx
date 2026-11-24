@@ -114,9 +114,6 @@ export const metadata: Metadata = {
       { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
     ],
   },
-  other: {
-    "google-adsense-account": "ca-pub-3119498931056624",
-  },
 };
 
 export const viewport: Viewport = {
@@ -142,10 +139,12 @@ export default function RootLayout({
         <link rel="preconnect" href="https://image.tmdb.org" />
         <link rel="dns-prefetch" href="https://image.tmdb.org" />
 
-        {/* Adsterra SocialBar */}
+        {/* Monetag — MultiTag (Zone 312263) */}
         <script
+          src="https://quge5.com/88/tag.min.js"
+          data-zone="312263"
+          async
           data-cfasync="false"
-          src="https://bancadeltempoidea.org/14/7fba8a16f1052bde2768194308ebf54f"
         />
 
         {/* Monetag — Onclick Popunder (Zone 12292036) */}
@@ -168,19 +167,6 @@ export default function RootLayout({
         style={{ fontFamily: "'Sora', sans-serif" }}
         suppressHydrationWarning
       >
-        {/* Google AdSense */}
-        <Script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3119498931056624"
-          crossOrigin="anonymous"
-          strategy="afterInteractive"
-        />
-
-        {/* Adsterra Popunder */}
-        <Script
-          src="https://interventioncopiedloitering.com/ea/0b/66/ea0b6624392f4516e561df54bbceefaf.js"
-          strategy="afterInteractive"
-        />
 
         {/* Google tag (gtag.js) — Google Analytics */}
         <Script
