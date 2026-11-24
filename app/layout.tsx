@@ -139,26 +139,19 @@ export default function RootLayout({
         <link rel="preconnect" href="https://image.tmdb.org" />
         <link rel="dns-prefetch" href="https://image.tmdb.org" />
 
-        {/* Monetag — MultiTag (Zone 312263) */}
-        <script
-          src="https://quge5.com/88/tag.min.js"
-          data-zone="312263"
-          async
-          data-cfasync="false"
-        />
-
-        {/* Monetag — Onclick Popunder (Zone 12292036) */}
+        {/* Monetag — Onclick Popunder (Zone 12339261) */}
         <script
           data-cfasync="false"
           dangerouslySetInnerHTML={{
-            __html: `(function(s){s.dataset.zone='12292036',s.setAttribute('data-cfasync','false'),s.src='https://llvpn.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')));`,
+            __html: `(function(s){s.dataset.zone='12339261',s.setAttribute('data-cfasync','false'),s.src='https://llvpn.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')));`,
           }}
         />
 
-        {/* Monetag Service Worker Registration */}
+        {/* Monetag — Vignette (Zone 12339299) */}
         <script
+          data-cfasync="false"
           dangerouslySetInnerHTML={{
-            __html: `if(typeof window!=='undefined'&&'serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('/sw.js').catch(function(){});});}`,
+            __html: `(function(s){s.dataset.zone='12339299',s.setAttribute('data-cfasync','false'),s.src='https://dd133.com/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')));`,
           }}
         />
       </head>

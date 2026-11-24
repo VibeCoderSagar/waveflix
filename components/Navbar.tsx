@@ -24,14 +24,6 @@ export default function Navbar() {
   const isActive = (href: string) =>
     href === "/" ? pathname === "/" : pathname.startsWith(href);
 
-  // Stop ad networks from firing popunders when clicking navigation tabs, search, or logo
-  const suppressAd = (e: React.MouseEvent | React.TouchEvent) => {
-    e.stopPropagation();
-    if (e.nativeEvent) {
-      e.nativeEvent.stopImmediatePropagation();
-    }
-  };
-
   const submitSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (query.trim()) router.push(`/search?q=${encodeURIComponent(query.trim())}`);
@@ -40,19 +32,11 @@ export default function Navbar() {
   return (
     <>
       {/* ---------- Desktop top navbar ---------- */}
-      <header
-        onClick={suppressAd}
-        onMouseDown={suppressAd}
-        onTouchEnd={suppressAd}
-        className="fixed top-0 left-0 right-0 z-50 hidden md:block"
-      >
+      <header className="fixed top-0 left-0 right-0 z-50 hidden md:block">
         <div className="backdrop-blur-xl bg-base-900/70 border-b border-white/5">
           <div className="max-w-[1600px] mx-auto flex items-center gap-8 px-8 h-[76px]">
             <Link
               href="/"
-              onClick={suppressAd}
-              onMouseDown={suppressAd}
-              onTouchEnd={suppressAd}
               className="flex items-center gap-2 shrink-0 group"
             >
               <motion.div
@@ -74,9 +58,6 @@ export default function Navbar() {
                   <Link
                     key={tab.href}
                     href={tab.href}
-                    onClick={suppressAd}
-                    onMouseDown={suppressAd}
-                    onTouchEnd={suppressAd}
                     className="relative px-4 py-2 group"
                   >
                     <motion.span
@@ -152,18 +133,10 @@ export default function Navbar() {
       </header>
 
       {/* ---------- Mobile top mini header ---------- */}
-      <header
-        onClick={suppressAd}
-        onMouseDown={suppressAd}
-        onTouchEnd={suppressAd}
-        className="fixed top-0 left-0 right-0 z-50 md:hidden backdrop-blur-xl bg-base-900/80 border-b border-white/5"
-      >
+      <header className="fixed top-0 left-0 right-0 z-50 md:hidden backdrop-blur-xl bg-base-900/80 border-b border-white/5">
         <div className="flex items-center justify-between px-4 h-[60px]">
           <Link
             href="/"
-            onClick={suppressAd}
-            onMouseDown={suppressAd}
-            onTouchEnd={suppressAd}
             className="flex items-center gap-2"
           >
             <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-neon-pink via-neon-violet to-neon-blue flex items-center justify-center">
@@ -193,12 +166,7 @@ export default function Navbar() {
       </header>
 
       {/* ---------- Mobile bottom tab bar (app-like) ---------- */}
-      <nav
-        onClick={suppressAd}
-        onMouseDown={suppressAd}
-        onTouchEnd={suppressAd}
-        className="fixed bottom-0 left-0 right-0 z-50 md:hidden"
-      >
+      <nav className="fixed bottom-0 left-0 right-0 z-50 md:hidden">
         <div className="backdrop-blur-xl bg-base-900/85 border-t border-white/10 px-2 pb-[env(safe-area-inset-bottom)]">
           <div className="flex items-center justify-between">
             {TABS.map((tab) => {
@@ -208,9 +176,6 @@ export default function Navbar() {
                 <Link
                   key={tab.href}
                   href={tab.href}
-                  onClick={suppressAd}
-                  onMouseDown={suppressAd}
-                  onTouchEnd={suppressAd}
                   className="flex-1"
                 >
                   <motion.div

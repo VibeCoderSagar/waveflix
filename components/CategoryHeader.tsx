@@ -50,18 +50,6 @@ export default function CategoryHeader({
               <Link
                 key={s.key}
                 href={`${basePath}?sort=${s.key}`}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  if (e.nativeEvent) e.nativeEvent.stopImmediatePropagation();
-                }}
-                onMouseDown={(e) => {
-                  e.stopPropagation();
-                  if (e.nativeEvent) e.nativeEvent.stopImmediatePropagation();
-                }}
-                onTouchEnd={(e) => {
-                  e.stopPropagation();
-                  if (e.nativeEvent) e.nativeEvent.stopImmediatePropagation();
-                }}
               >
                 <motion.span
                   whileHover={{ scale: 1.05 }}
