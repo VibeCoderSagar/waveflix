@@ -10,7 +10,7 @@ import { img } from "@/lib/tmdb";
 import { formatRuntime } from "@/lib/utils";
 import { useDragScroll } from "@/lib/useDragScroll";
 import VideoPlayer from "./VideoPlayer";
-import { triggerMonetagAds } from "@/lib/ads";
+import { openSmartlink } from "@/lib/ads";
 import { openAppDownloadModal } from "@/lib/appModal";
 
 interface Season {
@@ -165,18 +165,16 @@ export default function WatchClient({
             <div className="grid gap-3 md:grid-cols-2">
               <AnimatePresence mode="popLayout">
                 {episodes.map((ep, i) => (
-                  <motion.a
+                  <motion.button
                     key={ep.id}
-                    href={`#episode-${ep.episode_number}`}
                     initial={{ opacity: 0, y: 14 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.35, delay: Math.min(i * 0.03, 0.3) }}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      triggerMonetagAds();
+                    onClick={() => {
+                      openSmartlink();
                       setActiveEpisode(ep.episode_number);
                     }}
-                    className={`text-left flex gap-3 p-2.5 rounded-2xl border transition-colors cursor-pointer ${activeEpisode === ep.episode_number
+                    className={`text-left flex gap-3 p-2.5 rounded-2xl border transition-colors ${activeEpisode === ep.episode_number
                       ? "border-neon-cyan/50 bg-white/[0.06]"
                       : "border-white/5 bg-white/[0.02] hover:bg-white/[0.05] hover:border-white/15"
                       }`}
@@ -221,7 +219,7 @@ export default function WatchClient({
                         {ep.overview || "No description available."}
                       </p>
                     </div>
-                  </motion.a>
+                  </motion.button>
                 ))}
               </AnimatePresence>
             </div>

@@ -35,10 +35,7 @@ export default function Navbar() {
       <header className="fixed top-0 left-0 right-0 z-50 hidden md:block">
         <div className="backdrop-blur-xl bg-base-900/70 border-b border-white/5">
           <div className="max-w-[1600px] mx-auto flex items-center gap-8 px-8 h-[76px]">
-            <Link
-              href="/"
-              className="flex items-center gap-2 shrink-0 group"
-            >
+            <Link href="/" className="flex items-center gap-2 shrink-0 group">
               <motion.div
                 whileHover={{ rotate: -8, scale: 1.08 }}
                 whileTap={{ scale: 0.9 }}
@@ -55,11 +52,7 @@ export default function Navbar() {
               {TABS.filter((t) => t.href !== "/search").map((tab) => {
                 const active = isActive(tab.href);
                 return (
-                  <Link
-                    key={tab.href}
-                    href={tab.href}
-                    className="relative px-4 py-2 group"
-                  >
+                  <Link key={tab.href} href={tab.href} className="relative px-4 py-2 group">
                     <motion.span
                       whileTap={{ scale: 0.9 }}
                       className={`relative z-10 inline-flex items-center gap-1.5 text-sm font-semibold transition-colors ${active ? "text-white" : "text-white/55 hover:text-white/85"
@@ -135,15 +128,12 @@ export default function Navbar() {
       {/* ---------- Mobile top mini header ---------- */}
       <header className="fixed top-0 left-0 right-0 z-50 md:hidden backdrop-blur-xl bg-base-900/80 border-b border-white/5">
         <div className="flex items-center justify-between px-4 h-[60px]">
-          <Link
-            href="/"
-            className="flex items-center gap-2"
-          >
+          <div className="flex items-center gap-2">
             <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-neon-pink via-neon-violet to-neon-blue flex items-center justify-center">
               <Film size={16} className="text-white" />
             </div>
             <span className="font-display font-extrabold text-lg text-rainbow">WaveFlix</span>
-          </Link>
+          </div>
 
           <motion.button
             whileTap={{ scale: 0.92 }}
@@ -173,11 +163,7 @@ export default function Navbar() {
               const active = isActive(tab.href);
               const Icon = tab.icon;
               return (
-                <Link
-                  key={tab.href}
-                  href={tab.href}
-                  className="flex-1"
-                >
+                <Link key={tab.href} href={tab.href} className="flex-1">
                   <motion.div
                     whileTap={{ scale: 0.82 }}
                     className="flex flex-col items-center gap-1 py-2.5"

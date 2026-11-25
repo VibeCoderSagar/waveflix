@@ -8,7 +8,6 @@ import KeyboardShortcuts from "@/components/KeyboardShortcuts";
 import TelegramButton from "@/components/TelegramButton";
 import AppDownloadModal from "@/components/AppDownloadModal";
 import FloatingAppButton from "@/components/FloatingAppButton";
-import MonetagAdManager from "@/components/MonetagAdManager";
 import { SITE_URL, SITE_NAME, SITE_DESCRIPTION } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -115,6 +114,9 @@ export const metadata: Metadata = {
       { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
     ],
   },
+  other: {
+    "google-adsense-account": "ca-pub-3119498931056624",
+  },
 };
 
 export const viewport: Viewport = {
@@ -140,19 +142,24 @@ export default function RootLayout({
         <link rel="preconnect" href="https://image.tmdb.org" />
         <link rel="dns-prefetch" href="https://image.tmdb.org" />
 
-        {/* Monetag — Onclick Popunder (Zone 12339261) */}
+        {/* Adsterra SocialBar */}
         <script
           data-cfasync="false"
-          dangerouslySetInnerHTML={{
-            __html: `(function(s){s.dataset.zone='12339261',s.setAttribute('data-cfasync','false'),s.src='https://llvpn.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')));`,
-          }}
+          src="https://bancadeltempoidea.org/14/7fba8a16f1052bde2768194308ebf54f"
         />
 
-        {/* Monetag — Vignette (Zone 12339299) */}
+        {/* Monetag — MultiTag AI All-in-One (Zone 312263) */}
         <script
+          src="https://quge5.com/88/tag.min.js"
+          data-zone="312263"
+          async
           data-cfasync="false"
+        />
+
+        {/* Monetag Service Worker Registration */}
+        <script
           dangerouslySetInnerHTML={{
-            __html: `(function(s){s.dataset.zone='12339299',s.setAttribute('data-cfasync','false'),s.src='https://dd133.com/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')));`,
+            __html: `if(typeof window!=='undefined'&&'serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('/sw.js').catch(function(){});});}`,
           }}
         />
       </head>
@@ -161,6 +168,19 @@ export default function RootLayout({
         style={{ fontFamily: "'Sora', sans-serif" }}
         suppressHydrationWarning
       >
+        {/* Google AdSense */}
+        <Script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3119498931056624"
+          crossOrigin="anonymous"
+          strategy="afterInteractive"
+        />
+
+        {/* Adsterra Popunder */}
+        <Script
+          src="https://interventioncopiedloitering.com/ea/0b/66/ea0b6624392f4516e561df54bbceefaf.js"
+          strategy="afterInteractive"
+        />
 
         {/* Google tag (gtag.js) — Google Analytics */}
         <Script
@@ -223,7 +243,6 @@ export default function RootLayout({
         <AmbientBackground />
         <KeyboardShortcuts />
         <Navbar />
-        <MonetagAdManager />
         <main className="relative z-10 min-h-screen pb-24 md:pb-0 pt-[64px] md:pt-[76px]">
           {children}
         </main>

@@ -47,10 +47,7 @@ export default function CategoryHeader({
           {SORTS.map((s) => {
             const active = activeSort === s.key;
             return (
-              <Link
-                key={s.key}
-                href={`${basePath}?sort=${s.key}`}
-              >
+              <Link key={s.key} href={`${basePath}?sort=${s.key}`}>
                 <motion.span
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.92 }}

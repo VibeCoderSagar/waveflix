@@ -1,10 +1,10 @@
 "use client";
 
-import Link from "next/link";
 import SafeImage from "@/components/SafeImage";
+import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { OTTPlatform, OTT_LOGO_URL } from "@/lib/ott";
-import { triggerMonetagAds } from "@/lib/ads";
+import { openSmartlink } from "@/lib/ads";
 
 export default function OTTPlatformCard({
   platform,
@@ -15,7 +15,13 @@ export default function OTTPlatformCard({
   size?: "row" | "grid";
   index?: number;
 }) {
+  const router = useRouter();
   const dims = size === "grid" ? "w-full aspect-square" : "w-[104px] h-[104px] md:w-[128px] md:h-[128px]";
+
+  const handleClick = () => {
+    openSmartlink();
+    router.push(`/ott/${platform.slug}`);
+  };
 
   return (
     <motion.div
@@ -24,11 +30,7 @@ export default function OTTPlatformCard({
       transition={{ duration: 0.35, delay: Math.min(index * 0.03, 0.3), ease: [0.22, 1, 0.36, 1] }}
       className={size === "grid" ? "w-full" : "shrink-0"}
     >
-      <Link
-        href={`/ott/${platform.slug}`}
-        onClick={() => triggerMonetagAds()}
-        className="block group cursor-pointer"
-      >
+      <div onClick={handleClick} className="block group cursor-pointer">
         <motion.div
           whileTap={{ scale: 0.94 }}
           whileHover={{ scale: 1.04 }}
@@ -52,7 +54,7 @@ export default function OTTPlatformCard({
         <p className="mt-2 text-center text-[12px] md:text-sm font-semibold text-white/85 line-clamp-1 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-neon-pink group-hover:to-neon-blue transition-all">
           {platform.name}
         </p>
-      </Link>
+      </div>
     </motion.div>
   );
 }
